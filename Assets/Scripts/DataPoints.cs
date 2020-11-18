@@ -6,7 +6,8 @@ public class DataPoints : MonoBehaviour
     int totalDataPoints = 0;
     bool isTriggered = false;
     bool isInVicinity = false;
-    float pressedTimer;
+    float pressedTimer = 0f;
+
     [SerializeField] float downloadTime = 3f;
 
     void OnTriggerEnter(Collider other)
@@ -24,7 +25,7 @@ public class DataPoints : MonoBehaviour
             pressedTimer += Time.deltaTime;
             if (pressedTimer >= downloadTime)
             {
-                DataPointCollected();
+                totalDataPoints++;
                 isTriggered = true;
                 print("Player made contact " + totalDataPoints);
             }
@@ -35,8 +36,4 @@ public class DataPoints : MonoBehaviour
         }
     }
 
-    private void DataPointCollected()
-    {
-        totalDataPoints++;
-    }
 }
