@@ -8,6 +8,7 @@ namespace UPLOAD.Core
     {
         private int totalDatapoints = 0;
         int dataPointsInScene = 0;
+        bool winCondition = false;
 
         public void IncrementTotal()
         {
@@ -30,6 +31,20 @@ namespace UPLOAD.Core
             GameObject[] dataPoints = GameObject.FindGameObjectsWithTag("DataPoint");
 
             dataPointsInScene = dataPoints.Length;
+        }
+
+        public void Update()
+        {
+            if(totalDatapoints == dataPointsInScene && !winCondition)
+            {
+                winCondition = true;
+                LevelWinHandler();
+            }
+        }
+
+        public void LevelWinHandler()
+        {
+            print("You Win");
         }
     }
 }
