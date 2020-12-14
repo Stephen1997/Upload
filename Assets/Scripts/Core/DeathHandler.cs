@@ -5,6 +5,7 @@ using UnityEngine;
 public class DeathHandler : MonoBehaviour
 {
     [SerializeField] Canvas gameOverCanvas;
+    [SerializeField] GameObject explosionEffect;
     
     bool isDead = false;
 
@@ -15,6 +16,7 @@ public class DeathHandler : MonoBehaviour
 
     public bool IsDead()
     {
+        Explode();
         Invoke("HandleDeath", 2);
 
         isDead = true;
@@ -26,6 +28,13 @@ public class DeathHandler : MonoBehaviour
         gameOverCanvas.enabled = true;
         Time.timeScale = 0;
         Cursor.visible = true;
+    }
+
+    void Explode()
+    {
+        Instantiate(explosionEffect, transform.position, transform.rotation);
+
+        //Destroy(gameObject);
     }
 
 
