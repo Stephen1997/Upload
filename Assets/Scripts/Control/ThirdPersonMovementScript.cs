@@ -58,7 +58,10 @@ public class ThirdPersonMovementScript : MonoBehaviour
     float turnSmoothVelocity;
     public float turnSmoothTime = 0.1f;
 
-    // Update is called once per frame
+    public void Start()
+    {
+        Cursor.visible = false;
+    }
     void Update()
     {
         //jump

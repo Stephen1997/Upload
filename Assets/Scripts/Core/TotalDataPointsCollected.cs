@@ -8,6 +8,15 @@ public class TotalDataPointsCollected : MonoBehaviour
     int dataPointsInScene = 0;
     bool winCondition = false;
 
+    public void Start()
+    {
+        //String reference needs to be changed if the DataPoint tag is ever changed in unity
+        GameObject[] dataPoints = GameObject.FindGameObjectsWithTag("DataPoint");
+
+        dataPointsInScene = dataPoints.Length;
+        print(dataPointsInScene);
+    }
+    
     public void IncrementTotal()
     {
         totalDatapoints++;
@@ -21,14 +30,6 @@ public class TotalDataPointsCollected : MonoBehaviour
     public int GetPointsInScene()
     {
         return dataPointsInScene;
-    }
-
-    void Start()
-    {
-        //String reference needs to be changed if the DataPoint tag is ever changed in unity
-        GameObject[] dataPoints = GameObject.FindGameObjectsWithTag("DataPoint");
-
-        dataPointsInScene = dataPoints.Length;
     }
 
     public void Update()

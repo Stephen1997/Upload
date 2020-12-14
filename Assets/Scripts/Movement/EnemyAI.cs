@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    PlayerHandler ph;
+    DeathHandler ph;
 
     [SerializeField] Transform target;
     [SerializeField] float chaseRange = 5f;
@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
     {
         GameObject gob;
         gob = GameObject.Find("Player");
-        ph = gob.GetComponent<PlayerHandler>();
+        ph = gob.GetComponent<DeathHandler>();
 
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -37,11 +37,8 @@ public class EnemyAI : MonoBehaviour
             if (distanceToTarget <= killRange)
             {
                 Explode();
-                ph.IsDead();
-                print("Killed ye, ya Bastard!");
-            }
-
-            
+                ph.IsDead();                
+            }            
         }
     }
 
