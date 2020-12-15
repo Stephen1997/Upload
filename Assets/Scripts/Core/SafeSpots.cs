@@ -22,9 +22,8 @@ public class SafeSpots : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isTriggered = true;
-            enemyAi.SetAlertStatusToFalse();
+            enemyAi.SetAlertStatus(false);
             enemyAi.ReturnToPost();
-            print("test1");
         }
     }
 

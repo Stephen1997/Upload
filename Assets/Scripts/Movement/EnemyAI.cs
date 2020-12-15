@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    DeathHandler ph;
+    DeathHandler dh;
 
     [SerializeField] Transform target;
     [SerializeField] float chaseRange = 5f;
@@ -17,7 +17,6 @@ public class EnemyAI : MonoBehaviour
     float distanceToTarget = Mathf.Infinity;
     bool isDead = false;
     bool isAlert = false;
-    bool isChasing = false;
 
     Vector3 guardPosition;
 
@@ -25,7 +24,7 @@ public class EnemyAI : MonoBehaviour
     {
         GameObject gob;
         gob = GameObject.Find("Player");
-        ph = gob.GetComponent<DeathHandler>();
+        dh = gob.GetComponent<DeathHandler>();
 
         guardPosition = transform.position;
 
@@ -36,45 +35,46 @@ public class EnemyAI : MonoBehaviour
     {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
 
+        print(guardPosition + " guard position during update");
+
+
         //alert a dude
         if (distanceToTarget <= chaseRange && !isDead)
         {
             isAlert = true;
         }
 
-        //explode a dude
-        if (distanceToTarget <= killRange)
-        {
-            Explode();
-            ph.KillPlayer();
-        }
-
-        print(guardPosition); //testing
-
         //chase a dude
         if (isAlert == true)
         {
             ChasePlayer();
-            print(isAlert);
+            //print(isAlert);
         }
-    }
-
-    public void SetAlertStatusToFalse()
-    {
-        isAlert = false;
-    }
-
-    public void ReturnToPost()
-    {
-        //isAlert = false;
-        print(guardPosition + "+");
-        //navMeshAgent.SetDestination(guardPosition);
     }
 
     public void ChasePlayer()
     {
         navMeshAgent.SetDestination(target.position);
+
+        //explode a dude
+        if (distanceToTarget <= killRange)
+        {
+            Explode();
+            dh.KillPlayer();
+        }
     }
+
+    public void SetAlertStatus(bool status)
+    {
+        isAlert = status;
+    }
+
+    public void ReturnToPost()
+    {
+        //isAlert = false;
+        print(guardPosition + " guard position after stepping on plate");
+        navMeshAgent.SetDestination(guardPosition);
+    }    
 
     void Explode()
     {
