@@ -5,6 +5,9 @@ using UnityEngine;
 public class SafeSpots : MonoBehaviour
 {
     EnemyAI enemyAi;
+    GameObject enemyPrefab;
+    List<EnemyAI> enemyAis;
+
 
     [SerializeField] GameObject safeDoor;
 
@@ -12,18 +15,26 @@ public class SafeSpots : MonoBehaviour
 
     void Start()
     {
-        GameObject gob;
-        gob = GameObject.FindGameObjectWithTag("Enemy");
-        enemyAi = gob.GetComponent<EnemyAI>();
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); ;
+        enemyAis = new List<EnemyAI>(); 
+
+        foreach (GameObject enemy in enemies)
+        {
+            enemyAis.Add(enemy.GetComponent<EnemyAI>());
+        }
     }
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             isTriggered = true;
-            enemyAi.SetAlertStatus(false);
-            enemyAi.ReturnToPost();
+
+            foreach (EnemyAI enemyAi in enemyAis)
+            {
+                enemyAi.SetAlertStatus(false);
+                enemyAi.ReturnToPost();
+            }
         }
     }
 
