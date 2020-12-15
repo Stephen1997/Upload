@@ -16,12 +16,18 @@ public class EnemyAI : MonoBehaviour
     NavMeshAgent navMeshAgent;
     float distanceToTarget = Mathf.Infinity;
     bool isDead = false;
+    bool isAlert = false;
+    bool isChasing = false;
+
+    Vector3 guardPosition;
 
     void Start()
     {
         GameObject gob;
         gob = GameObject.Find("Player");
         ph = gob.GetComponent<DeathHandler>();
+
+        guardPosition = transform.position;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -30,16 +36,44 @@ public class EnemyAI : MonoBehaviour
     {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
 
+        //alert a dude
         if (distanceToTarget <= chaseRange && !isDead)
         {
-            navMeshAgent.SetDestination(target.position); 
-            
-            if (distanceToTarget <= killRange)
-            {
-                Explode();
-                ph.IsDead();                
-            }            
+            isAlert = true;
         }
+
+        //explode a dude
+        if (distanceToTarget <= killRange)
+        {
+            Explode();
+            ph.KillPlayer();
+        }
+
+        print(guardPosition); //testing
+
+        //chase a dude
+        if (isAlert == true)
+        {
+            ChasePlayer();
+            print(isAlert);
+        }
+    }
+
+    public void SetAlertStatusToFalse()
+    {
+        isAlert = false;
+    }
+
+    public void ReturnToPost()
+    {
+        //isAlert = false;
+        print(guardPosition + "+");
+        //navMeshAgent.SetDestination(guardPosition);
+    }
+
+    public void ChasePlayer()
+    {
+        navMeshAgent.SetDestination(target.position);
     }
 
     void Explode()

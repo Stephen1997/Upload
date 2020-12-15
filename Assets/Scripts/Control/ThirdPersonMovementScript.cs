@@ -57,13 +57,19 @@ public class ThirdPersonMovementScript : MonoBehaviour
 
     float turnSmoothVelocity;
     public float turnSmoothTime = 0.1f;
+    DeathHandler dh;
 
     public void Start()
     {
         Cursor.visible = false;
+        GameObject gob;
+        gob = GameObject.Find("Player");
+        dh = gob.GetComponent<DeathHandler>();
     }
     void Update()
     {
+        if (dh.IsDead()) return;
+
         //jump
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 

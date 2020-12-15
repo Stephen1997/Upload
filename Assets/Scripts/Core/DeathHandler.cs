@@ -16,11 +16,15 @@ public class DeathHandler : MonoBehaviour
 
     public bool IsDead()
     {
+        return isDead;
+    }
+
+    public void KillPlayer()
+    {
         Explode();
         Invoke("HandleDeath", 2);
 
         isDead = true;
-        return isDead;
     }
 
     public void HandleDeath()
