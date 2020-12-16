@@ -39,7 +39,6 @@ public class EnemyAI : MonoBehaviour
             Mover(GetCurrentWaypoint());
         }
 
-        //PatrolBehaviour();
     }
 
     void Update()
@@ -61,11 +60,7 @@ public class EnemyAI : MonoBehaviour
         if (AtWaypoint())
         {
             PatrolBehaviour();
-            print("Running patrol");
         }
-        print(currentWaypointIndex);
-        print(transform.position);
-        print(GetCurrentWaypoint());
     }
 
     public void Mover(Vector3 destination)
@@ -92,6 +87,7 @@ public class EnemyAI : MonoBehaviour
 
     public void ReturnToPost()
     {
+        print("test");
         if (patrolPath != null)
         {
             Mover(GetCurrentWaypoint());
@@ -105,13 +101,10 @@ public class EnemyAI : MonoBehaviour
     public void PatrolBehaviour()
     {
         Vector3 nextPosition = guardPosition;
-        print("test 1");
         if(patrolPath != null)
         {
-            print("test 2");
             if (AtWaypoint())
             {
-                print("test3");
                 CycleWaypoint();
             }
             nextPosition = GetCurrentWaypoint();

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class SafeSpots : MonoBehaviour
 
 
     [SerializeField] GameObject safeDoor;
+    [SerializeField] float movementSpeed = 10f;
 
     bool isTriggered = false;
 
@@ -24,11 +26,12 @@ public class SafeSpots : MonoBehaviour
         }
     }
 
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isTriggered = true;
+            SafetyDoor(true);
 
             foreach (EnemyAI enemyAi in enemyAis)
             {
@@ -38,9 +41,22 @@ public class SafeSpots : MonoBehaviour
         }
     }
 
+    private void SafetyDoor(bool state)
+    {
+        if (state)
+        {
+            safeDoor.transform.position = new Vector3(safeDoor.transform.position.x, safeDoor.transform.position.y + 5, safeDoor.transform.position.z);
+        }
+        else
+        {
+            safeDoor.transform.position = new Vector3(safeDoor.transform.position.x, safeDoor.transform.position.y - 5, safeDoor.transform.position.z);
+        }
+    }
+
     public void OnTriggerExit(Collider other)
     {
         isTriggered = false;
+        SafetyDoor(false);
     }
 
     public bool GetIsTriggered()
