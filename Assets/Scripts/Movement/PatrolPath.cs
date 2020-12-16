@@ -16,7 +16,7 @@ public class PatrolPath : MonoBehaviour
         }
     }
 
-    private int GetNextIndex(int i)
+    public int GetNextIndex(int i)
     {
         if(i + 1 == transform.childCount)
         {
