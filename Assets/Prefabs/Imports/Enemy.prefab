@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1197639522778638453}
   - component: {fileID: 6559482851808292482}
   - component: {fileID: 524380335}
-  - component: {fileID: 524380338}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -44,7 +43,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -74,18 +73,7 @@ MonoBehaviour:
   explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
     type: 3}
   patrolPath: {fileID: 0}
---- !u!114 &524380338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197639522778638452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0eef01e28968941b6a7c1e383d78a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  waypointTolerance: 1.2
 --- !u!65 &1664850072
 BoxCollider:
   m_ObjectHideFlags: 0

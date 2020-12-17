@@ -87,7 +87,6 @@ public class EnemyAI : MonoBehaviour
 
     public void ReturnToPost()
     {
-        print("test");
         if (patrolPath != null)
         {
             Mover(GetCurrentWaypoint());
@@ -116,7 +115,14 @@ public class EnemyAI : MonoBehaviour
     {
         if (patrolPath == null)
         {
-            return guardPosition;
+            if (!isAlert)
+            {
+                return guardPosition;
+            }
+            else
+            {
+                return target.position;
+            }
         }
         else
         {

@@ -22,7 +22,7 @@ public class TotalDataPointsCollected : MonoBehaviour
         dataPointsInScene = dataPoints.Length;
         print(dataPointsInScene);
 
-        totalDatapoints = 18; //test come back later
+        //totalDatapoints = 18; //test come back later
     }
     
     public void IncrementTotal()
