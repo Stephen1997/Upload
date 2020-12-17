@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class TotalDataPointsCollected : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class TotalDataPointsCollected : MonoBehaviour
     bool winCondition = false;
 
     VictoryHandler vh;
+
+    [SerializeField] GameObject scoreText;
+    AudioSource collectSound;
 
     public void Start()
     {
@@ -22,12 +27,17 @@ public class TotalDataPointsCollected : MonoBehaviour
         dataPointsInScene = dataPoints.Length;
         print(dataPointsInScene);
 
+        collectSound = GetComponent<AudioSource>();
+
         //totalDatapoints = 18; //test come back later
     }
     
     public void IncrementTotal()
     {
         totalDatapoints++;
+        print("gsreg");
+        collectSound.Play();
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Total Datpoints Collected: " + GetTotalDataPoints();
     }
 
     public int GetTotalDataPoints()

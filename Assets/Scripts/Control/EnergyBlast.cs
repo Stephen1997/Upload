@@ -1,18 +1,34 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnergyBlast : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject particleEffect;
+    [SerializeField] float lifetime;
+
+    GameObject particleEffectInstance;
+    bool isShocking = false;
+
+    private void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            print("shocking");
+            particleEffectInstance = Instantiate(particleEffect, transform.position, transform.rotation);
+            isShocking = true;
+        }
+
+        if (isShocking && particleEffectInstance != null)
+        {
+            particleEffectInstance.transform.position = transform.position;
+            DestroyParticleEffect();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void DestroyParticleEffect()
     {
-        
+        Destroy(particleEffectInstance, lifetime);
     }
 }
